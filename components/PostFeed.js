@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PostFeed({ posts, admin }) {
     return posts ? (
         posts.map((post) => (
@@ -29,7 +31,10 @@ function PostItem({ post, admin = false }) {
             <footer>
                 <span>
                     {wordCount} words. {minutesToRead} min read
-                    <span>Heart {post.heardCount}</span>
+                    <span className="push-left">
+                        {" "}
+                        ❤️ {post.heardCount || 0} Hearts
+                    </span>
                 </span>
             </footer>
         </div>

@@ -12,10 +12,11 @@ export async function getServerSideProps({ query }) {
 
     if (userDoc) {
         user = userDoc.data();
+        console.log(userDoc.ref, "<----");
         const postsQuery = userDoc.ref
             .collection("posts")
             .where("published", "==", true)
-            .orderBy("createdAt", "desc")
+            .orderBy("created_at", "desc")
             .limit(5);
 
         posts = (await postsQuery.get()).docs.map(postToJSON);
