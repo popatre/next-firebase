@@ -33,7 +33,7 @@ function PostItem({ post, admin = false }) {
                     {wordCount} words. {minutesToRead} min read
                     <span className="push-left">
                         {" "}
-                        ❤️ {post.heardCount || 0} Hearts
+                        ❤️ {post.heartCount || 0} Hearts
                     </span>
                 </span>
             </footer>

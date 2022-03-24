@@ -12,7 +12,7 @@ export async function getServerSideProps({ query }) {
 
     if (userDoc) {
         user = userDoc.data();
-        console.log(userDoc.ref, "<----");
+
         const postsQuery = userDoc.ref
             .collection("posts")
             .where("published", "==", true)
