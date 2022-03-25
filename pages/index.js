@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { firestore, postToJSON, fromMillis } from "../lib/firebase";
 import PostFeed from "../components/PostFeed";
 import { useState } from "react";
+import Metatags from "../components/Metatags";
 
 const limit = 1;
 
@@ -58,6 +59,11 @@ export default function Home(props) {
 
     return (
         <main>
+            <Metatags
+                title="JM News feed"
+                description="News feed description"
+                image="https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
+            />
             <PostFeed posts={posts} />
 
             {!loading && !postsEnd && (
