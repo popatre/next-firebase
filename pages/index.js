@@ -62,7 +62,9 @@ export default function Home(props) {
             <Metatags
                 title="JM News feed"
                 description="News feed description"
-                image="https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
+                image={
+                    "https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
+                }
             />
             <PostFeed posts={posts} />
 
