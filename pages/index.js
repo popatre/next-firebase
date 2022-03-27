@@ -1,7 +1,4 @@
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
 import Loader from "../components/Loader";
-import toast from "react-hot-toast";
 import { firestore, postToJSON, fromMillis } from "../lib/firebase";
 import PostFeed from "../components/PostFeed";
 import { useState } from "react";
@@ -9,14 +6,12 @@ import Metatags from "../components/Metatags";
 
 const limit = 1;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     const postsQuery = firestore
         .collectionGroup("posts")
         .where("published", "==", true)
         .orderBy("created_at", "desc")
         .limit(limit);
-
-    const result = postsQuery.get().then((data) => data.docs.map(postToJSON));
 
     const posts = (await postsQuery.get()).docs.map(postToJSON);
 

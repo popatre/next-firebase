@@ -2,8 +2,8 @@ import PostFeed from "../../components/PostFeed";
 import UserProfile from "../../components/UserProfile";
 import { getUserWithUsername, postToJSON } from "../../lib/firebase";
 
-export async function getServerSideProps({ query }) {
-    const { username } = query;
+export async function getServerSideProps({ params }) {
+    const { username } = params;
 
     const userDoc = await getUserWithUsername(username);
 
@@ -34,7 +34,6 @@ export async function getServerSideProps({ query }) {
 export default function UsernamePage({ user, posts }) {
     return (
         <main>
-            <h1>Username page</h1>
             <UserProfile user={user} />
             <PostFeed posts={posts} />
         </main>
