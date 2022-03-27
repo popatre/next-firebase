@@ -1,7 +1,7 @@
 import { firestore, getUserWithUsername, postToJSON } from "../../lib/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import PostContent from "../../components/PostContent";
-// import styles from "../../styles/Post.module.css";
+import styles from "../../styles/Post.module.css";
 
 export default function PostPage(props) {
     const postRef = firestore.doc(props.path);
@@ -10,7 +10,7 @@ export default function PostPage(props) {
     const post = realtimePost || props.post;
 
     return (
-        <main>
+        <main className={styles.container}>
             <section>
                 <PostContent post={post} />
             </section>

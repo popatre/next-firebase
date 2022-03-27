@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import AuthCheck from "../../components/AuthCheck";
 import { auth, serverTimeStamp, firestore } from "../../lib/firebase";
@@ -6,6 +7,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import toast from "react-hot-toast";
+import styles from "../../styles/Admin.module.css";
 
 export default function AdminPostEdit() {
     return (
@@ -30,7 +32,7 @@ function PostManager() {
     const [post] = useDocumentData(postRef);
 
     return (
-        <main classname="container">
+        <main className={styles.container}>
             {post && (
                 <>
                     <section>
@@ -42,7 +44,15 @@ function PostManager() {
                             preview={preview}
                         />
                     </section>
-                    <aside></aside>
+                    <aside>
+                        <h3>Tools</h3>
+                        <button onClick={() => setPreview(!preview)}>
+                            {preview ? "Edit" : "Preview"}
+                        </button>
+                        <Link href={`/${post.username}/${post.slug}`}>
+                            <button className="btn-blue">Live view</button>
+                        </Link>
+                    </aside>
                 </>
             )}
         </main>
@@ -50,10 +60,19 @@ function PostManager() {
 }
 
 function PostForm({ postRef, defaultValues, preview }) {
-    const { register, handleSubmit, watch, reset } = useForm({
+    const {
+        register,
+        handleSubmit,
+        watch,
+        reset,
+        formState,
+        formState: { errors },
+    } = useForm({
         defaultValues,
         mode: "onChange",
     });
+
+    const { isValid, isDirty } = formState;
 
     const updatePost = async ({ content, published }) => {
         await postRef.update({
@@ -72,18 +91,40 @@ function PostForm({ postRef, defaultValues, preview }) {
                     <ReactMarkdown>{watch("content")}</ReactMarkdown>
                 </div>
             )}
-            <div className={preview ? "hidden" : "controls"}>
-                <textarea name="content" {...register("content")}></textarea>
+            <div className={preview ? styles.hidden : styles.controls}>
+                <textarea
+                    name="content"
+                    {...register("content", {
+                        maxLength: {
+                            value: 20000,
+                            message: "content is too short",
+                        },
+                        minLength: { value: 10, message: "content too short" },
+                        required: {
+                            value: true,
+                            message: "content is required",
+                        },
+                    })}
+                ></textarea>
+
+                {errors.content && (
+                    <p className="text-danger">{errors.content.message}</p>
+                )}
+
                 <fieldset>
                     <input
                         {...register("published")}
-                        className="checkbox"
+                        className={styles.checkbox}
                         name="published"
                         type="checkbox"
                     />
                     <label>Published</label>
                 </fieldset>
-                <button type="submit" className="btn-green">
+                <button
+                    className="btn-green"
+                    type="submit"
+                    disabled={!isValid || !isDirty}
+                >
                     Save Changes
                 </button>
             </div>

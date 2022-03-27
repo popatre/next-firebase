@@ -1,4 +1,5 @@
 import AuthCheck from "../../components/AuthCheck";
+import styles from "../../styles/Admin.module.css";
 import { auth, firestore, serverTimeStamp } from "../../lib/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import PostFeed from "../../components/PostFeed";
@@ -84,12 +85,13 @@ function CreateNewPost() {
                 placeholder="My next article..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                className={styles.input}
             />
             <p>
                 <strong>Slug:</strong>
                 {slug}
             </p>
-            <button type="submit" disable={isValid}>
+            <button className="btn-green" type="submit" disable={isValid}>
                 Create new post
             </button>
         </form>
