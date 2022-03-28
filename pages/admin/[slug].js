@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 import toast from "react-hot-toast";
 import styles from "../../styles/Admin.module.css";
+import ImageUploader from "../../components/ImageUploader";
 
 export default function AdminPostEdit() {
     return (
@@ -92,6 +93,8 @@ function PostForm({ postRef, defaultValues, preview }) {
                 </div>
             )}
             <div className={preview ? styles.hidden : styles.controls}>
+                <ImageUploader />
+
                 <textarea
                     name="content"
                     {...register("content", {

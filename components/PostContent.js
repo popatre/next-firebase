@@ -20,7 +20,6 @@ export default function PostContent({ post }) {
             </span>
 
             <ReactMarkdown>{post?.content}</ReactMarkdown>
-            <p>{post?.content}</p>
         </div>
     );
 }
