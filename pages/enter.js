@@ -141,7 +141,7 @@ function UsernameMessage({ loading, isValid, username }) {
     } else if (isValid) {
         return <p className="text-success">{username} is available!</p>;
     } else if (username && !isValid) {
-        return <p classname="text-danger">That username is already taken</p>;
+        return <p className="text-danger">That username is already taken</p>;
     } else {
         return <p></p>;
     }
