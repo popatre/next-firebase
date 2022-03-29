@@ -37,7 +37,7 @@ export default function UsernamePage({ user, posts }) {
     return (
         <main>
             <Metatags
-                title={`${user.username}'s feed page`}
+                title={`${user.username}'s posts`}
                 description={`A collection of ${user.username}'s posts to the site`}
                 image={
                     "https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
