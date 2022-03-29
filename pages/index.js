@@ -4,7 +4,7 @@ import PostFeed from "../components/PostFeed";
 import { useState } from "react";
 import Metatags from "../components/Metatags";
 
-const limit = 1;
+const limit = 3;
 
 export async function getServerSideProps() {
     const postsQuery = firestore
