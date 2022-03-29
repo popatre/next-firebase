@@ -13,11 +13,6 @@ export default function Metatags({ title, description, image }) {
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content={image} />
-            <title>Next.js News Feed App</title>
-            <meta
-                name="description"
-                content="A next.js web application, built along side firebase. Displays firebase data, using a mixture of SSR, SSG and ISG."
-            ></meta>
         </Head>
     );
 }

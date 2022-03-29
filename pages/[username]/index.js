@@ -1,6 +1,7 @@
 import PostFeed from "../../components/PostFeed";
 import UserProfile from "../../components/UserProfile";
 import { getUserWithUsername, postToJSON } from "../../lib/firebase";
+import Metatags from "../../components/Metatags";
 
 export async function getServerSideProps({ params }) {
     const { username } = params;
@@ -34,6 +35,13 @@ export async function getServerSideProps({ params }) {
 export default function UsernamePage({ user, posts }) {
     return (
         <main>
+            <Metatags
+                title="JM News feed"
+                description="News feed description"
+                image={
+                    "https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
+                }
+            />
             <UserProfile user={user} />
             <PostFeed posts={posts} />
         </main>
