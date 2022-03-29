@@ -33,11 +33,12 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function UsernamePage({ user, posts }) {
+    console.log(user.username, "*****");
     return (
         <main>
             <Metatags
-                title="JM News feed"
-                description="News feed description"
+                title={`${user.username}'s feed page`}
+                description={`A collection of ${user.username}'s posts to the site`}
                 image={
                     "https://newsfeed.org/wp-content/uploads/How-news-feed-works-Newsfeed.png"
                 }
