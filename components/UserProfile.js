@@ -1,6 +1,9 @@
 import { auth } from "../lib/firebase";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
 
 export default function UserProfile({ user }) {
+    const { username } = useContext(UserContext);
     return (
         <>
             <div className="box-center">
@@ -10,7 +13,7 @@ export default function UserProfile({ user }) {
                 </p>
                 <h1>{user.displayName}</h1>
                 <div className="row">
-                    {auth.currentUser?.uid && <SignOutButton />}
+                    {username === user.username && <SignOutButton />}
                 </div>
             </div>
         </>
