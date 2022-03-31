@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Modal from "react-modal";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { firestore } from "../lib/firebase";
 import { UserContext } from "../lib/context";
 import toast from "react-hot-toast";
@@ -31,6 +31,7 @@ function PostItem({ post, admin = false }) {
     const wordCount = post?.content.trim().split(/\s+/g).length;
     const minutesToRead = (wordCount / 100 + 1).toFixed(0);
     const [isOpen, setIsOpen] = useState(false);
+    let subtitle;
 
     const { user } = useContext(UserContext);
     const router = useRouter();
@@ -41,7 +42,8 @@ function PostItem({ post, admin = false }) {
 
     function afterOpenModal() {
         // references are now sync'd and can be accessed.
-        // subtitle.style.color = "#f00";
+        subtitle.style.display = "flex";
+        subtitle.style.flexDirection = "column";
     }
 
     function closeModal() {
@@ -92,7 +94,10 @@ function PostItem({ post, admin = false }) {
                         ❤️ {post.heartCount || 0} Hearts
                     </span>
                     {admin && !router.query.username && (
-                        <button onClick={openModal} className="btn-red">
+                        <button
+                            onClick={openModal}
+                            className="btn-red post-feed_btn"
+                        >
                             Delete
                         </button>
                     )}
@@ -105,11 +110,20 @@ function PostItem({ post, admin = false }) {
                 style={customStyles}
                 contentLabel="Confirm deletion"
             >
-                <h2>Are you sure you want to delete this?</h2>
-                <button className="btn-red" onClick={handleClick}>
-                    Confirm
-                </button>
-                <button onClick={closeModal}>Cancel</button>
+                <div ref={(_subtitle) => (subtitle = _subtitle)}>
+                    <h2>Are you sure you want to delete this?</h2>
+                    <div className="row">
+                        <button
+                            className="btn-red modal-btn"
+                            onClick={handleClick}
+                        >
+                            Confirm
+                        </button>
+                    </div>
+                    <div className="row">
+                        <button onClick={closeModal}>Cancel</button>
+                    </div>
+                </div>
             </Modal>
         </div>
     );

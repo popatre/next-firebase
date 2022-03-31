@@ -177,6 +177,15 @@ button.btn-signout {
     color: white;
 }
 
+.btn-red.modal-btn {
+    padding: 1.3em 3.8em;
+}
+
+.post-feed_btn {
+    padding: 1em;
+    margin-top: 2em;
+}
+
 /* Cards */
 
 .card {
