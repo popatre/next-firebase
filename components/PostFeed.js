@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { useState, useContext } from "react";
 import { firestore } from "../lib/firebase";
 import { UserContext } from "../lib/context";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const customStyles = {
     content: {
@@ -31,6 +33,7 @@ function PostItem({ post, admin = false }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const { user } = useContext(UserContext);
+    const router = useRouter();
 
     function openModal() {
         setIsOpen(true);
@@ -53,9 +56,10 @@ function PostItem({ post, admin = false }) {
                 .collection("posts")
                 .doc(post.slug)
                 .delete();
-            console.log("deleted successfully");
+            toast.success("Deleted successfully!");
             closeModal();
         } catch (error) {
+            toast.error("Something went wrong, please try again");
             console.log("somethings gone wrong");
         }
     };
@@ -87,7 +91,7 @@ function PostItem({ post, admin = false }) {
                         {" "}
                         ❤️ {post.heartCount || 0} Hearts
                     </span>
-                    {admin && (
+                    {admin && !router.query.username && (
                         <button onClick={openModal} className="btn-red">
                             Delete
                         </button>
