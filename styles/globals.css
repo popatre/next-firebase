@@ -171,6 +171,12 @@ button.btn-logo {
     padding: 0.5rem 1rem;
 }
 
+button.btn-signout {
+    padding: 1em;
+    background-color: rgb(132, 120, 179);
+    color: white;
+}
+
 /* Cards */
 
 .card {
@@ -270,4 +276,9 @@ input[type="file"] {
 
 .hidden {
     display: none;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
 }
