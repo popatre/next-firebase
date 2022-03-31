@@ -2,6 +2,8 @@ import PostFeed from "../../components/PostFeed";
 import UserProfile from "../../components/UserProfile";
 import { getUserWithUsername, postToJSON } from "../../lib/firebase";
 import Metatags from "../../components/Metatags";
+import { useContext } from "react";
+import { UserContext } from "../../lib/context";
 
 export async function getServerSideProps({ params }) {
     const { username } = params;
@@ -33,7 +35,10 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function UsernamePage({ user, posts }) {
-    console.log(user.username, "*****");
+    const { username } = useContext(UserContext);
+    let admin = false;
+    if (username === user.username) admin = true;
+
     return (
         <main>
             <Metatags
@@ -44,7 +49,7 @@ export default function UsernamePage({ user, posts }) {
                 }
             />
             <UserProfile user={user} />
-            <PostFeed posts={posts} />
+            <PostFeed posts={posts} admin={admin} />
         </main>
     );
 }

@@ -20,7 +20,7 @@ export default function PostPage(props) {
 
             <aside className="card">
                 <p>
-                    <strong>{post.heartCount || 0} 🤍</strong>
+                    <strong>{post.heartCount || 0} 🤍 </strong>
                 </p>
 
                 <AuthCheck
@@ -51,7 +51,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: { path, post },
-        revalidate: 5000,
+        revalidate: 50,
     };
 }
 

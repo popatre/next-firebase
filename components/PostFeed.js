@@ -22,6 +22,12 @@ function PostItem({ post, admin = false }) {
                 </a>
             </Link>
 
+            {admin && (
+                <Link href={`/admin/${post.slug}`}>
+                    <button>Edit</button>
+                </Link>
+            )}
+
             <Link href={`/${post.username}/${post.slug}`}>
                 <h2>
                     <a> {post.title}</a>

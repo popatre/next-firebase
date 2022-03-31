@@ -44,7 +44,11 @@ export default function Home(props) {
             document.data()
         );
 
-        setPosts(posts.concat(newPosts));
+        setPosts((prevPosts) => {
+            return [...prevPosts, ...newPosts];
+        });
+
+        // setPosts(posts.concat(newPosts));
         setLoading(false);
 
         if (newPosts.length < limit) {

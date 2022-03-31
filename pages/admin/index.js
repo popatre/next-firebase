@@ -13,8 +13,8 @@ export default function AdminPostPage() {
     return (
         <main>
             <AuthCheck>
-                <PostList />
                 <CreateNewPost />
+                <PostList />
             </AuthCheck>
         </main>
     );
