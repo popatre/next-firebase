@@ -73,19 +73,29 @@ function PostItem({ post, admin = false }) {
                     <strong> By @{post.username}</strong>
                 </a>
             </Link>
-
             {admin && (
                 <Link href={`/admin/${post.slug}`}>
                     <button>Edit</button>
                 </Link>
             )}
 
+            {admin && !router.query.username ? (
+                post.published ? (
+                    <p>
+                        ✅ <b>Published </b>
+                    </p>
+                ) : (
+                    <p>
+                        ❌ <b>Not Published </b>
+                    </p>
+                )
+            ) : null}
+
             <Link href={`/${post.username}/${post.slug}`}>
                 <h2>
                     <a> {post.title}</a>
                 </h2>
             </Link>
-
             <footer>
                 <span>
                     {wordCount} words. {minutesToRead} min read
